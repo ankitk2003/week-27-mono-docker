@@ -21,6 +21,6 @@ jobs:
         with:
           context: .
           file: ./docker/Dockerfile.frontend
-          build-args: DATABASE_URL=${{ secrets.DATABASE_URL }}
+          build-args: DATABASE_URL=postgresql://neondb_owner:npg_kLEw3X7GuJgn@ep-lively-bonus-a88vfdy5-pooler.eastus2.azure.neon.tech/neondb?sslmode=require
           push: true
           tags: kumarankit0262/user-app-frontend:${{ github.sha }}
