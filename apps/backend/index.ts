@@ -37,4 +37,27 @@ app.post("/user", (req, res) => {
     });
 })
 
+app.get("/user", (req, res) => {
+  const { username, password } = req.body;
+  
+  if (!username || !password) {
+    res.status(400).json({ error: "Username and password are required" });
+    return
+  }
+
+  prismaClient.user.findFirst({
+    where: {
+      username,
+      password
+    }
+  })
+    .then(user => {
+      res.json(user);
+    })
+    .catch(err => {
+      res.status(500).json({ error: err.message });
+    });
+})
+
+
 app.listen(8080);
