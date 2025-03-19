@@ -2,7 +2,7 @@ FROM oven/bun:1
 
 WORKDIR /usr/src/app
 
-# Define ARG and ENV together
+# Define ARG and also set it as ENV
 ARG DATABASE_URL
 ENV DATABASE_URL=${DATABASE_URL}  
 
@@ -14,7 +14,7 @@ COPY ./apps/web ./apps/web
 
 RUN bun install
 RUN bun run db:generate
-RUN bun run build  # No need to pass DATABASE_URL explicitly, it's in ENV now.
+RUN bun run build  
 
 EXPOSE 8000
 
