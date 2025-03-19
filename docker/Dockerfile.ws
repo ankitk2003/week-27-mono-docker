@@ -2,7 +2,7 @@ FROM oven/bun:1
 
 WORKDIR /usr/src/app
 
-## this is optimised
+## this is optimised and ...
 COPY ./packages ./packages
 COPY ./bun.lock ./bun.lock
 COPY ./package.json ./package.json
