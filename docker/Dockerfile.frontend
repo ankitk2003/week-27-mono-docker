@@ -2,19 +2,20 @@ FROM oven/bun:1
 
 WORKDIR /usr/src/app
 
+# Define ARG and ENV together
+ARG DATABASE_URL
+ENV DATABASE_URL=${DATABASE_URL}  
 
-ARG DATABASE_URL 
-## ARG s ab docker build image k time wo arguments k time databse url bhej sakta hai.++++++++++
 COPY ./packages ./packages
 COPY ./bun.lock ./bun.lock
 COPY ./package.json ./package.json
 COPY ./turbo.json ./turbo.json
 COPY ./apps/web ./apps/web
-RUN bun install
 
+RUN bun install
 RUN bun run db:generate
-RUN DATABASE_URL=${DATABASE_URL} bun run build
+RUN bun run build  # No need to pass DATABASE_URL explicitly, it's in ENV now.
 
 EXPOSE 8000
 
-CMD ["bun","run","start:web"]
+CMD ["bun", "run", "start:web"]

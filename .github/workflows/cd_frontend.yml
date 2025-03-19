@@ -24,4 +24,4 @@ jobs:
           build-args: |
             DATABASE_URL=${{ secrets.DATABASE_URL }}
           push: true
-          tags: kumarankit0262/user-app-websocket:${{ github.sha }}
+          tags: kumarankit0262/user-app-frontend:${{ github.sha }}
