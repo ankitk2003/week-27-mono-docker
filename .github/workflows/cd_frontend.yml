@@ -21,7 +21,8 @@ jobs:
           context: .
           file: ./docker/Dockerfile.frontend
           build-args: |
-            - DATABASE_URL=${{ secrets.DATABASE_URL }}
+            - DATABASE_URL=
+            - ${{ secrets.DATABASE_URL }}
           push: true
           tags: 100xdevs/todo-app-websocket:${{ github.sha }}
       ## Step to deploy this to a VM
