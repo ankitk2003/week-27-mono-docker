@@ -1,27 +1,27 @@
-name: Continuous Deployment (Prod) (Frontend)
+name: Deploy the frontend
 on:
   push:
-    branches: [main]
-jobs:
+    branches: [ main ]
+jobs: 
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
+      - name: Checkout the code
+        uses: actions/checkout@v2
 
       - name: Docker login
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Build and push
-        uses: docker/build-push-action@v4  # Fix indentation here
+      
+      - name: Build and push 
+        uses: docker/build-push-action@v4
         with:
           context: .
           file: ./docker/Dockerfile.frontend
-          build-args: |
-            DATABASE_URL=${{ secrets.DATABASE_URL }}
+          build-args:
+            - DATABASE_URL=${{ secrets.DATABASE_URL }}
           push: true
-          tags: kumarankit0262/user-app-frontend:${{ github.sha }}
+          tags: 100xdevs/todo-app-websocket:${{ github.sha }}
+      ## Step to deploy this to a VM
