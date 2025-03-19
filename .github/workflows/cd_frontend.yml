@@ -17,10 +17,11 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and push
-        uses: docker/build-push-action@v4
+        uses: docker/build-push-action@v4  # Fix indentation here
         with:
           context: .
           file: ./docker/Dockerfile.frontend
-          build-args: DATABASE_URL=postgresql://neondb_owner:npg_kLEw3X7GuJgn@ep-lively-bonus-a88vfdy5-pooler.eastus2.azure.neon.tech/neondb?sslmode=require
+          build-args: |
+            DATABASE_URL=${{ secrets.DATABASE_URL }}
           push: true
           tags: kumarankit0262/user-app-frontend:${{ github.sha }}
